@@ -1,0 +1,68 @@
+<div class="text-layout">
+    <h1>Pipes no tan comunes</h1>
+    <p>Pipes incluidos en Angular - Usualmente en el Common Module</p>
+</div>
+
+<div class="grid">
+   <div class="col-12 md:col-6 sm:col-9"> 
+        <p-fieldset legend="i18nSelectPipe" [toggleable]="true">
+            <p>
+                Saludos {{ nombre }}, es un placer {{ genero | i18nSelect:invitacionMapa }} a nuestro evento.
+            </p>
+            <button pButton type="button" label="Cambiar persona" class="p-button-help p-button-outlined"
+                    (click)="cambiarCliente()">
+            </button>
+            
+        </p-fieldset>
+   </div>
+   <div class="col-12 md:col-6 sm:col-9"> 
+        <p-fieldset legend="i18nPluralPipe" [toggleable]="true">
+            <p>
+                Actualmente {{ clientes.length | i18nPlural:clientesMapa }} 
+            </p>
+            <button pButton type="button" label="Borrar cliente" class="p-button-danger p-button-outlined"
+                    (click)="borrarCliente()">
+            </button>
+        </p-fieldset>
+    </div>
+    <div class="col-12 md:col-6 sm:col-9"> 
+        <p-fieldset legend="SlicePipe" [toggleable]="true">
+            <b>Original</b>
+            <pre>{{ clientes }}</pre> <!-- el objeto no se refresca, si necesitaramos que lo hiciera hariamos:  <span *ngFor="let cliente of clientes">{{cliente}}</span> -->
+            
+            <b>slice:0:2</b><!-- cortar la informacion desde la posicion de inicio 0 al fin 2 que la posicion 2 ya no la incluye -->
+            <pre>{{ clientes | slice:0:2 }}</pre>
+
+            <b>slice:1:2</b><!-- corta la informacion desde la posicion de inicio 1 al fin 2 -->
+            <pre>{{ clientes | slice:1:2 }}</pre>
+
+            <b>slice:0:3 de un string</b><!-- corta la informacion del string,  -->
+            <pre>{{ nombre | slice:0:3 }}</pre>
+               
+        </p-fieldset>
+    </div>
+
+    <div class="col-12 md:col-6 sm:col-9"> 
+        <p-fieldset legend="KeyValue Pipe" [toggleable]="true">
+            <ul>
+                <li *ngFor="let item of persona | keyvalue"> <!-- El ngfor necesita un array, como tenemos un objeto gracias a este pipe podemos iterar el objeto -->
+                    <b>{{ item.key | titlecase }}:</b> {{ item.value }}
+                </li>
+            </ul>
+        </p-fieldset>
+    </div>
+
+    <div class="col-12 md:col-6 sm:col-9"> 
+        <p-fieldset legend="Json Pipe" [toggleable]="true">
+            <pre>{{ heroes | json }}</pre>
+        </p-fieldset>
+    </div>
+
+    <div class="col-12 md:col-6 sm:col-9"> 
+        <p-fieldset legend="Async Pipe" [toggleable]="true">
+            <pre>{{ miObservable | async }}</pre>
+            <pre *ngIf="!(valorPromesa | async)">Resolviendo promesa</pre>
+            <pre>{{ valorPromesa | async }}</pre>
+        </p-fieldset>
+    </div>
+</div>
